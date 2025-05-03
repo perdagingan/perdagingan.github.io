@@ -1,7 +1,6 @@
 {
   "*.{js,ts,astro}": [
-    "prettier --write --plugin=prettier-plugin-astro",
-    "eslint --fix"
+    "prettier --write --plugin=prettier-plugin-astro"
   ],
   "*.yml": "prettier --write",
   "*.{json,md}": "prettier --write"

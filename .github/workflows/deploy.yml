@@ -40,7 +40,7 @@ jobs:
       - name: Setup pnpm 8
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 8.10.0
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -51,8 +51,8 @@ jobs:
       - name: Validate build output
         run: |
           ls -la dist/
-          test -f dist/.nojekyll || (echo "❌ .nojekyll file missing!" && exit 1)
-          test -d dist/_astro || (echo "❌ Astro build files missing!" && exit 1)
+          test -f dist/.nojekyll || (echo "❌ .nojekyll missing!" && exit 1)
+          test -d dist/_astro || (echo "❌ Astro build failed!" && exit 1)
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -66,7 +66,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

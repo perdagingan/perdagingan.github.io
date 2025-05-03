@@ -17,6 +17,11 @@ jobs:
     timeout-minutes: 3
 
     steps:
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+        version: 8.10.0
+
       - name: 🛫 Checkout code
         uses: actions/checkout@v4
 
