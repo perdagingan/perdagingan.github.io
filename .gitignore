@@ -29,3 +29,10 @@ pnpm-debug.log*
 # pagefind
 
 public/pagefind
+
+# No jekyll
+# Jekyll artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
