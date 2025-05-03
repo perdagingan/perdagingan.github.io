@@ -18,5 +18,13 @@ export default {
         parser: "astro",
       },
     },
-  ],
+    {
+      files: "*.yml",
+      options: {
+        tabWidth: 2,
+        singleQuote: false,
+        bracketSpacing: false
+      }
+    }
+  ]
 };
