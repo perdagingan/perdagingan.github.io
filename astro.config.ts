@@ -8,7 +8,7 @@ import type { Plugin } from "vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://anamanulis.me",
+  site: SITE.website,
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
