@@ -11,7 +11,7 @@ on:
         default: false
 
 jobs:
-  build:
+  code-standards: # Diubah dari "build" untuk menghindari konflik nama
     name: Check Code standards & Quality
     runs-on: ubuntu-latest
     timeout-minutes: 3
@@ -23,7 +23,7 @@ jobs:
       - name: "📦 Install pnpm"
         uses: pnpm/action-setup@v2
         with:
-          version: 8.10.o
+          version: "8.10.0" # Diperbaiki dari "8.10.o" ke "8.10.0"
 
       - name: 🔧 Setup Node.js ${{ inputs.node-version }}
         uses: actions/setup-node@v4
