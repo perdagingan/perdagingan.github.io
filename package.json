@@ -17,11 +17,11 @@
     "coverage": "vitest run --coverage"
   },
   "volta": {
-    "node": "20.18.1",
+    "node": "20.19.1",
     "pnpm": "8.10.0"
   },
   "engines": {
-    "node": "20.18.1"
+    "node": "20.19.1"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.11",
