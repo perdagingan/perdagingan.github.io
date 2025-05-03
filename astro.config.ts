@@ -59,15 +59,4 @@ export default defineConfig({
       exclude: ["@resvg/resvg-js"],
     },
   },
-
-  image: {
-    experimentalLayout: "responsive",
-  },
-
-  experimental: {
-    svg: true,
-    responsiveImages: true,
-    preserveScriptOrder: true,
-    contentCollectionCache: true, // Optimasi cache untuk build
-  },
 });
