@@ -72,7 +72,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   code_quality:
-    uses: ./.github/workflows/code-standards-checks.yml
+    uses: ./.github/workflows/code-standards-checks.yml@main
 
   unit-tests:
     uses: ./.github/workflows/tests.yml
