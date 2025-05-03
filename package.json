@@ -1,10 +1,10 @@
 {
-  "name": "placeolder",
+  "name": "placeholder",
   "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist && cp -r dist/pagefind public/",
+    "build": "astro build && pagefind --site dist && touch dist/.nojekyll",
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",

@@ -10,13 +10,22 @@ import {
   SUPPORTED_LOCALES,
 } from "./src/i18n/config";
 
-// https://astro.build/config
 export default defineConfig({
-  site: SITE.website,
+  site: "https://perdagingan.github.io",
+  outDir: "./dist",
+  trailingSlash: "always",
+
+  // Konfigurasi build khusus untuk GitHub Pages
+  build: {
+    format: "directory",
+    inlineStylesheets: "always",
+  },
+
   i18n: {
     locales: SUPPORTED_LOCALES,
     defaultLocale: DEFAULT_LOCALE,
   },
+
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
@@ -26,6 +35,7 @@ export default defineConfig({
       },
     }),
   ],
+
   markdown: {
     remarkPlugins: [
       [
@@ -38,25 +48,26 @@ export default defineConfig({
       [remarkCollapse, { test: "Table of contents" }],
     ],
     shikiConfig: {
-      // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
       wrap: true,
     },
   },
+
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
   },
+
   image: {
-    // Used for all Markdown images; not configurable per-image
-    // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
     experimentalLayout: "responsive",
   },
+
   experimental: {
     svg: true,
     responsiveImages: true,
     preserveScriptOrder: true,
+    contentCollectionCache: true, // Optimasi cache untuk build
   },
 });
