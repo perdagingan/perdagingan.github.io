@@ -1,6 +1,4 @@
 ---
-import { getRelativeLocalePath } from "@/i18n/utils";
-
 export interface Props {
   id?: string;
   href: string;
@@ -9,8 +7,6 @@ export interface Props {
   title?: string;
   disabled?: boolean;
 }
-
-const isExternalPath = (path: string) => URL.canParse(path);
 
 const {
   id,
@@ -35,11 +31,7 @@ const {
   ) : (
     <a
       id={id}
-      href={
-        isExternalPath(href)
-          ? href
-          : getRelativeLocalePath(Astro.currentLocale, href)
-      }
+      {href}
       class:list={["group inline-block hover:text-accent", className]}
       aria-label={ariaLabel}
       title={title}

@@ -1,225 +1,177 @@
-# AstroPaper with I18n
+# AstroPaper 📄
 
-🌍 [اقرأنى بالعربية](README.ar.md)
+![AstroPaper](public/astropaper-og.jpg)
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/community/file/1356898632249991861)
+![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![GitHub](https://img.shields.io/github/license/satnaing/astro-paper?color=%232F3741&style=for-the-badge)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white&style=for-the-badge)](https://conventionalcommits.org)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge)](http://commitizen.github.io/cz-cli/)
 
-<div align='center'>
+AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro blog theme. This theme is designed and crafted based on [my personal blog](https://satnaing.dev/blog).
 
-![AstroPaper I18n](/public/astro-paper-i18n.png)
-
-</div>
-
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/yousef8/astro-paper-i18n/deploy.yml?branch=main)
-![GitHub Release](https://img.shields.io/github/v/release/yousef8/astro-paper-i18n)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3877e14a-0bdc-4e85-bcd4-542f93f860a3/deploy-status)](https://app.netlify.com/sites/astro-paper-i18n/deploys)
-
-This repository is a fork of the [AstroPaper](https://github.com/satnaing/astro-paper) theme, enhanced to support internationalization (i18n).
-
-The fork Builds upon the original AstroPaper theme to integrate i18n functionality.
-
-I18n integration is implemented using [Astorjs i18n routing](https://docs.astro.build/en/guides/internationalization/)
-
-As I'm a native Arabic speaker, I made sure the i18n integration supports RTL languages (etc Arabic, Persian,...).
-
-If god wills, this fork will maintain synchronization with the original [AstroPaper](https://github.com/satnaing/astro-paper) theme.
-
-This Fork does not modify the original theme’s UI; it solely adds i18n support.
-
-## Table Of Contents
-
-- [🔥 Features](#-features)
-  - [UI Enhancements](#ui-enhancements)
-  - [i18n Features](#i18n-features)
-  - [🧪 Testing](#-testing)
-- [Lighthouse Score](#lighthouse-score)
-- [Installation](#installation)
-- [📖 How To Use](#-how-to-use)
-- [🛠️ Configuration](#%EF%B8%8F-configuration)
-  - [🔧 Site Configurations](#-site-configurations)
-  - [🌐 Locale Configurations](#-locale-configurations)
-- [🧞 Commands](#-commands)
-- [🚧 Known Issues](#-known-issues)
+Read [the blog posts](https://astro-paper.pages.dev/posts/) or check [the README Documentation Section](#-documentation) for more info.
 
 ## 🔥 Features
 
-This project includes all the features of the original [AstroPaper](https://github.com/satnaing/astro-paper) theme, with the following enhancements:
+- [x] type-safe markdown
+- [x] super fast performance
+- [x] accessible (Keyboard/VoiceOver)
+- [x] responsive (mobile ~ desktops)
+- [x] SEO-friendly
+- [x] light & dark mode
+- [x] fuzzy search
+- [x] draft posts & pagination
+- [x] sitemap & rss feed
+- [x] followed best practices
+- [x] highly customizable
+- [x] dynamic OG image generation for blog posts [#15](https://github.com/satnaing/astro-paper/pull/15) ([Blog Post](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/))
 
-### UI Enhancements
+_Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver** on Mac and **TalkBack** on Android. I couldn't test all other screen-readers out there. However, accessibility enhancements in AstroPaper should be working fine on others as well._
 
-- [x] **Direction Agnostic:**
-  - [x] Full RTL support.
-  - [x] Consistent UI for both `LTR` and `RTL` directions.
-
-### i18n Features
-
-- [x] UI translations, including numbers and dates.
-- [x] Language switcher.
-- [x] Accessibility-related translations.
-- [x] Type-safe i18n integration using TypeScript.
-- [x] Sitemaps with i18n support ([`@astrojs/sitemap`](https://docs.astro.build/en/guides/integrations-guide/sitemap/)).
-- [x] OG image generation with i18n support
-  - Note: satori does not support RTL languages, causing layout issues for RTL OG images.
-- [x] RSS Feeds with i18n support ([`@astrojs/rss`](https://docs.astro.build/en/guides/rss/)).
-- [ ] 📋 **Planned:**
-  - [ ] Route translations.
-
-### 🧪 Testing
-
-- [x] Unit testing with [Vitest](https://vitest.dev/)
-- [x] Unit testing for i18n configurations and utilities
-- [ ] Unit testing for [src/utils](/src/utils)
-- [ ] Unit testing for [src/config.ts](/src/config.ts)
-
-## Lighthouse Score
-
-Click to view full report
+## ✅ Lighthouse Score
 
 <p align="center">
-  <a href="https://pagespeed.web.dev/analysis/https-yousef8-github-io-AstroPaperI18n-ar/d2cqwqovpv?form_factor=desktop">
-    <img width="710" alt="AstroPaper I18n Lighthouse Score" src="AstroPaper-lighthouse-score.svg">
+  <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fastro-paper.pages.dev%2F&form_factor=desktop">
+    <img width="710" alt="AstroPaper Lighthouse Score" src="AstroPaper-lighthouse-score.svg">
   <a>
 </p>
 
-## Installation
+## 🚀 Project Structure
 
-You can fork the repo
-
-Or you can install it using Astrojs cli
+Inside of AstroPaper, you'll see the following folders and files:
 
 ```bash
-pnpm create astro@latest --template yousef8/astro-paper-i18n
+/
+├── public/
+│   ├── assets/
+|   ├── pagefind/ # auto-generated when build
+│   └── favicon.svg
+│   └── astropaper-og.jpg
+│   └── favicon.svg
+│   └── toggle-theme.js
+├── src/
+│   ├── assets/
+│   │   └── icons/
+│   │   └── images/
+│   ├── components/
+│   ├── data/
+│   │   └── blog/
+│   │       └── some-blog-posts.md
+│   ├── layouts/
+│   └── pages/
+│   └── styles/
+│   └── utils/
+│   └── config.ts
+│   └── constants.ts
+│   └── content.config.ts
+└── astro.config.ts
 ```
 
-## 📖 How To Use
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-### 1- Create translations file
+Any static assets, like images, can be placed in the `public/` directory.
 
-Go to [src/i18n/locales](/src/i18n/locales) and create a file for your locale (e.g. es, ja, etc..), it should be named as `<locale_key>.ts` (e.g. es.ts, ja.ts, etc..).
+All blog posts are stored in `src/data/blog` directory.
 
-Export a variable of `I18nStrings` type from `@i18n/types` with all the translations as key value pairs.
+## 📖 Documentation
 
-Take a look at the type at [/src/i18n/types.ts](/src/i18n/types.ts) and example file [/src/i18n/locales/ar.ts](/src/i18n/locales/ar.ts)
+Documentation can be read in two formats\_ _markdown_ & _blog post_.
 
-### 2- Define locale configuration
+- Configuration - [markdown](src/data/blog/how-to-configure-astropaper-theme.md) | [blog post](https://astro-paper.pages.dev/posts/how-to-configure-astropaper-theme/)
+- Add Posts - [markdown](src/data/blog/adding-new-post.md) | [blog post](https://astro-paper.pages.dev/posts/adding-new-posts-in-astropaper-theme/)
+- Customize Color Schemes - [markdown](src/data/blog/customizing-astropaper-theme-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/)
+- Predefined Color Schemes - [markdown](src/data/blog/predefined-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/predefined-color-schemes/)
 
-Go to [src/i18n/config.ts](/src/i18n/config.ts) and define a locale profile for your locale inside the configuration object `localeToProfile`.
+## 💻 Tech Stack
 
-Locale configuration is used to define the name of the locale, the translations, the language tag, the UI layout direction, and the Google font name.
+**Main Framework** - [Astro](https://astro.build/)  
+**Type Checking** - [TypeScript](https://www.typescriptlang.org/)  
+**Styling** - [TailwindCSS](https://tailwindcss.com/)  
+**UI/UX** - [Figma Design File](https://www.figma.com/community/file/1356898632249991861)  
+**Static Search** - [FuseJS](https://pagefind.app/)  
+**Icons** - [Tablers](https://tabler-icons.io/)  
+**Code Formatting** - [Prettier](https://prettier.io/)  
+**Deployment** - [Cloudflare Pages](https://pages.cloudflare.com/)  
+**Illustration in About Page** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
+**Linting** - [ESLint](https://eslint.org)
 
-Create a locale key which must be in all lowercase and complient with BCP-47 names. (eg. ar, en, es, ja, etc..), it's value is an object with the following keys:
+## 👨🏻‍💻 Running Locally
 
-- Assign a name to the `name` key in your locale profile, it will be used in the language picker.
+You can start using this project locally by running the following command in your desired directory:
 
-- Assign translations file you created in step 1 to the `messages` key in your locale profile.
+```bash
+# pnpm
+pnpm create astro@latest --template satnaing/astro-paper
 
-- Language tag must be in BCP47 name compliant, it's used to localize date and time in original AstroPaper theme, but it's **scope was expanded to localize all the numbers too**. (eg. en-US, ar-EG, es-ES, ja-JP, etc..)
+# npm
+npm create astro@latest -- --template satnaing/astro-paper
 
-- Google font name is used only in [OG images](https://magefan.com/blog/open-graph-meta-tags).
-
-- set the `default` key to `true` if you want to set it, if no locale is set as default, the first locale in the object is used as the default.
-
-- set the `direction` key to one of supported values `rtl | ltr | auto` corresponds to html `dir` tag directives values
-
-**Note:** you may need to restart the dev server to see the changes.
-
-**Note:** [satori](https://github.com/vercel/satori) does not support RTL languages, causing layout issues for RTL [OG images](https://magefan.com/blog/open-graph-meta-tags).
-
-### 3- Add about page
-
-The about page now has it's own [content collection](https://docs.astro.build/en/guides/content-collections/) because this theme supports i18n and you will likely need about page content in multiple locales.
-
-Go to [src/content/about](/src/content/about) and create a file for your locale, it should be named as `about.<locale_key>.md` (e.g. about.en.md, about.es.md, etc..).
-
-Same frontmatter keys as in original AstroPaper theme are supported `title` and `description` for the page title and description.
-
-### 4- Add your content
-
-Under [src/conent/blog](/src/content/blog) create a folder with your locale key (e.g. es, ja, etc..) as it's name and add your content in markdown format.
-
-Any blog outside locale folder will not be considered by the site.
-
-That's it, you're done 🎈🎉 🥳!
-
-See [AstroPaper Docs](https://github.com/satnaing/astro-paper?tab=readme-ov-file#-documentation) for more info as this project builds upon it while to only support i18n, but everything else should be the same.
-
-## 🛠️ Configuration
-
-The same way to [use and configure AstroTheme](https://github.com/satnaing/astro-paper?tab=readme-ov-file#-project-structure), but with some changes.
-
-### 🔧 Site Configurations
-
-`SITE.title` and `SITE.desc` configuration has been replaced with `site.title` and `site.desc` translation, which is now used across whole site.
-
-```diff
-// src/config.ts
-
-export const SITE: Site = {
-  //...
--  title: "AstroPaper I18n",
--  desc: "A fork of AstroPaper theme with support for I18n",
-  //...
-};
+# yarn
+yarn create astro --template satnaing/astro-paper
 ```
 
-```diff
-// src/i18n/types.ts
+Then start the project by running the following commands:
 
-export interface I18nStrings {
-+  "site.title": string;
-+  "site.desc": string;
-   // ... other translations
+```bash
+# install dependencies if you haven't done so in the previous step.
+pnpm install
+
+# start running the project
+pnpm run dev
 ```
 
-### 🌐 Locale Configurations
+As an alternative approach, if you have Docker installed, you can use Docker to run this project locally. Here's how:
 
-Locale configuration has been moved from `src/config.ts` to a dedicated file for better organization.
+```bash
+# Build the Docker image
+docker build -t astropaper .
 
-```diff
-// src/config.ts
-
--export const LOCALE = {
--  lang: "en", // html lang code. Set this empty and default will be "en"
--  langTag: ["en-EN"], // BCP 47 Language Tags. Set this empty [] to use the environment default
--} as const;
-
-export const LOGO_IMAGE = {
+# Run the Docker container
+docker run -p 4321:80 astropaper
 ```
 
-Instead Locale configuration is now handled in `src/i18n/config.ts`:
+## Google Site Verification (optional)
 
-```ts
-// src/i18n/config.ts
-export const localeToProfile = {
-  // local key must be all lowercase and complaint with BCP-47
-  ar: {
-    name: "العربية", // Name presented in language picker
-    messages: ARLocale, // Locale translations
-    langTag: "ar-EG", // BCP 47 Language Tag (used for dates, numbers, and sitemap)
-    direction: "rtl", // UI layout direction
-    googleFontName: "Cairo", // For OG image generation, font must support 400 and 700 weights, replace spaces with '+'
-  },
-  en: {
-    name: "English",
-    messages: ENLocale,
-    langTag: "en-US",
-    direction: "ltr",
-    googleFontName: "IBM+Plex+Mono",
-    default: true,
-  },
-} satisfies Record<string, LocaleProfile>;
+You can easily add your [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) in AstroPaper using an environment variable. This step is optional. If you don't add the following environment variable, the google-site-verification tag won't appear in the HTML `<head>` section.
+
+```bash
+# in your environment variable file (.env)
+PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-site-verification-value
 ```
+
+> See [this discussion](https://github.com/satnaing/astro-paper/discussions/334#discussioncomment-10139247) for adding AstroPaper to the Google Search Console.
 
 ## 🧞 Commands
 
-Same [commands as in original theme](https://github.com/satnaing/astro-paper/tree/main?tab=readme-ov-file#-commands) with addition to
+All commands are run from the root of the project, from a terminal:
 
-| Command              | Action                                                                                      |
-| :------------------- | :------------------------------------------------------------------------------------------ |
-| `pnpm test`           | Run all unit tests once and exit [learn more](https://vitest.dev/guide/cli.html#vitest-run) |
-| `pnpm test:watch` | Run unit tests in watch mode [learn more](https://vitest.dev/guide/cli.html#vitest-watch)   |
-| `pnpm coverage`   | Generate unit testing coverage report [learn more](https://vitest.dev/guide/coverage.html)  |
+> **_Note!_** For `Docker` commands we must have it [installed](https://docs.docker.com/engine/install/) in your machine.
 
-## 🚧 Known Issues
+| Command                              | Action                                                                                                                           |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm install`                       | Installs dependencies                                                                                                            |
+| `pnpm run dev`                       | Starts local dev server at `localhost:4321`                                                                                      |
+| `pnpm run build`                     | Build your production site to `./dist/`                                                                                          |
+| `pnpm run preview`                   | Preview your build locally, before deploying                                                                                     |
+| `pnpm run format:check`              | Check code format with Prettier                                                                                                  |
+| `pnpm run format`                    | Format codes with Prettier                                                                                                       |
+| `pnpm run sync`                      | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
+| `pnpm run lint`                      | Lint with ESLint                                                                                                                 |
+| `docker compose up -d`               | Run AstroPaper on docker, You can access with the same hostname and port informed on `dev` command.                              |
+| `docker compose run app npm install` | You can run any command above into the docker container.                                                                         |
+| `docker build -t astropaper .`       | Build Docker image for AstroPaper.                                                                                               |
+| `docker run -p 4321:80 astropaper`   | Run AstroPaper on Docker. The website will be accessible at `http://localhost:4321`.                                             |
 
-- [ ] Styling in screen reader mode is currently broken and requires fixes.
-  - Contributions are welcome!
+> **_Warning!_** Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
+
+## ✨ Feedback & Suggestions
+
+If you have any suggestions/feedback, you can contact me via [my email](mailto:contact@satnaing.dev). Alternatively, feel free to open an issue if you find bugs or want to request new features.
+
+## 📜 License
+
+Licensed under the MIT License, Copyright © 2025
+
+---
+
+Made with 🤍 by [Sat Naing](https://satnaing.dev) 👨🏻‍💻 and [contributors](https://github.com/satnaing/astro-paper/graphs/contributors).

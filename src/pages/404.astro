@@ -3,18 +3,10 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import LinkButton from "@/components/LinkButton.astro";
-import { getLocaleInfo, translateFor } from "@/i18n/utils";
-
-const t = translateFor(Astro.currentLocale);
-
-const LOCALE = getLocaleInfo(Astro.currentLocale);
-
-const local404 = (404).toLocaleString(LOCALE.langTag);
-
-const title = `${local404} ${t("notFound")} | ${t("site.title")}`;
+import { SITE } from "@/config";
 ---
 
-<Layout title={title}>
+<Layout title={`404 Not Found | ${SITE.title}`}>
   <Header />
 
   <main
@@ -22,16 +14,14 @@ const title = `${local404} ${t("notFound")} | ${t("site.title")}`;
     class="mx-auto flex max-w-3xl flex-1 items-center justify-center"
   >
     <div class="mb-14 flex flex-col items-center justify-center">
-      <h1 class="text-9xl font-bold text-accent">{local404}</h1>
-      <span aria-hidden="true" style="unicode-bidi: isolate; direction: ltr;"
-        >¯\_(ツ)_/¯</span
-      >
-      <p class="mt-4 text-2xl sm:text-3xl">{t("pageNotFound")}</p>
+      <h1 class="text-9xl font-bold text-accent">404</h1>
+      <span aria-hidden="true">¯\_(ツ)_/¯</span>
+      <p class="mt-4 text-2xl sm:text-3xl">Page Not Found</p>
       <LinkButton
         href="/"
         class="my-6 text-lg underline decoration-dashed underline-offset-8"
       >
-        {t("navigation.goBackHome")}
+        Go back home
       </LinkButton>
     </div>
   </main>

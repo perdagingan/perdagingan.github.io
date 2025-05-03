@@ -30,21 +30,20 @@ async function loadGoogleFont(
 }
 
 async function loadGoogleFonts(
-  text: string,
-  fontName: string
+  text: string
 ): Promise<
   Array<{ name: string; data: ArrayBuffer; weight: number; style: string }>
 > {
   const fontsConfig = [
     {
-      name: fontName.split("+").join(" "),
-      font: fontName,
+      name: "IBM Plex Mono",
+      font: "IBM+Plex+Mono",
       weight: 400,
       style: "normal",
     },
     {
-      name: fontName.split("+").join(" "),
-      font: `${fontName}`,
+      name: "IBM Plex Mono",
+      font: "IBM+Plex+Mono",
       weight: 700,
       style: "bold",
     },

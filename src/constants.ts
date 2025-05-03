@@ -6,33 +6,31 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
-import { translateFor } from "@/i18n/utils";
-
-type Translator = ReturnType<typeof translateFor>;
+import { SITE } from "@/config.ts";
 
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/yousef8/astro-paper-i18n",
-    linkTitle: (t: Translator) => t("socials.github"),
+    href: "https://github.com/perdagingan",
+    linkTitle: ` ${SITE.title} on Github`,
     icon: IconGitHub,
   },
   {
     name: "X",
-    href: "https://x.com/username",
-    linkTitle: (t: Translator) => t("socials.x"),
+    href: "https://x.com/static_type",
+    linkTitle: `${SITE.title} on X`,
     icon: IconBrandX,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/username/",
-    linkTitle: (t: Translator) => t("socials.linkedin"),
+    href: "https://www.linkedin.com/in/anamfathonaya/",
+    linkTitle: `${SITE.title} on LinkedIn`,
     icon: IconLinkedin,
   },
   {
     name: "Mail",
-    href: "mailto:yourmail@gmail.com",
-    linkTitle: (t: Translator) => t("socials.mail"),
+    href: "mailto:anamfathonaya@proton.me",
+    linkTitle: `Send an email to ${SITE.title}`,
     icon: IconMail,
   },
 ] as const;
@@ -41,37 +39,37 @@ export const SHARE_LINKS = [
   {
     name: "WhatsApp",
     href: "https://wa.me/?text=",
-    linkTitle: (t: Translator) => t("sharePost.via", { media: "WhatsApp" }),
+    linkTitle: `Share this post via WhatsApp`,
     icon: IconWhatsapp,
   },
   {
     name: "Facebook",
     href: "https://www.facebook.com/sharer.php?u=",
-    linkTitle: (t: Translator) => t("sharePost.on", { media: "Facebook" }),
+    linkTitle: `Share this post on Facebook`,
     icon: IconFacebook,
   },
   {
     name: "X",
     href: "https://x.com/intent/post?url=",
-    linkTitle: (t: Translator) => t("sharePost.on", { media: "X" }),
+    linkTitle: `Share this post on X`,
     icon: IconBrandX,
   },
   {
     name: "Telegram",
     href: "https://t.me/share/url?url=",
-    linkTitle: (t: Translator) => t("sharePost.via", { media: "Telegram" }),
+    linkTitle: `Share this post via Telegram`,
     icon: IconTelegram,
   },
   {
     name: "Pinterest",
     href: "https://pinterest.com/pin/create/button/?url=",
-    linkTitle: (t: Translator) => t("sharePost.on", { media: "Pinterest" }),
+    linkTitle: `Share this post on Pinterest`,
     icon: IconPinterest,
   },
   {
     name: "Mail",
     href: "mailto:?subject=See%20this%20post&body=",
-    linkTitle: (t: Translator) => t("sharePost.via", { media: "Mail" }),
+    linkTitle: `Share this post via email`,
     icon: IconMail,
   },
 ] as const;

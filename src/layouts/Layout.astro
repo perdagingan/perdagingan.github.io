@@ -1,17 +1,7 @@
 ---
-import { DEFAULT_LOCALE } from "@/i18n/config";
-import {
-  translateFor,
-  getLocaleInfo,
-  getRelativeLocalePath,
-} from "@/i18n/utils";
 import { ClientRouter } from "astro:transitions";
 import { SITE } from "@/config";
 import "@/styles/global.css";
-
-const t = translateFor(Astro.currentLocale);
-
-const LOCALE = getLocaleInfo(Astro.currentLocale);
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -28,10 +18,10 @@ export interface Props {
 }
 
 const {
-  title = t("site.title"),
+  title = SITE.title,
   author = SITE.author,
   profile = SITE.profile,
-  description = t("site.desc"),
+  description = SITE.desc,
   ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
@@ -59,15 +49,11 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html
-  lang=`${Astro.currentLocale ?? DEFAULT_LOCALE}`
-  class={`${scrollSmooth && "scroll-smooth"}`}
-  dir={LOCALE.direction}
->
+<html lang=`${SITE.lang ?? "en"}` class={`${scrollSmooth && "scroll-smooth"}`}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href={"/favicon.svg"} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
@@ -76,7 +62,7 @@ const structuredData = {
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
-    <link rel="sitemap" href={"/sitemap-index.xml"} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />
@@ -121,29 +107,9 @@ const structuredData = {
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={t("site.title")}
-      href={new URL(
-        getRelativeLocalePath(Astro.currentLocale, "rss.xml"),
-        Astro.site
-      )}
+      title={SITE.title}
+      href={new URL("rss.xml", Astro.site)}
     />
-
-    <!-- Google Font -->
-    {
-      Astro.currentLocale === "ar" && (
-        <>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap"
-            rel="preload"
-            as="style"
-            onload="this.onload=null; this.rel='stylesheet';"
-            crossorigin
-          />
-        </>
-      )
-    }
 
     <meta name="theme-color" content="" />
 

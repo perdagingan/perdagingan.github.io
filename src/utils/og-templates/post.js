@@ -1,6 +1,6 @@
 import satori from "satori";
 // import { html } from "satori-html";
-import { translateFor } from "@/i18n/utils";
+import { SITE } from "@/config";
 import loadGoogleFonts from "../loadGoogleFont";
 
 // const markup = html`<div
@@ -93,23 +93,7 @@ import loadGoogleFonts from "../loadGoogleFont";
 //       </div>
 //     </div>`;
 
-export default async (post, localeKey, localeConfig) => {
-  const t = translateFor(localeKey);
-
-  const { direction } = localeConfig;
-
-  const siteTitle =
-    direction === "rtl"
-      ? t("site.title").split(" ").reverse().join(" ")
-      : t("site.title");
-
-  const postTitle =
-    direction === "rtl"
-      ? `${post.data.title}`.split(" ").reverse().join(" ")
-      : post.data.title;
-
-  const by = t("by");
-
+export default async post => {
   return satori(
     {
       type: "div",
@@ -176,7 +160,7 @@ export default async (post, localeKey, localeConfig) => {
                           maxHeight: "84%",
                           overflow: "hidden",
                         },
-                        children: postTitle,
+                        children: post.data.title,
                       },
                     },
                     {
@@ -194,7 +178,7 @@ export default async (post, localeKey, localeConfig) => {
                             type: "span",
                             props: {
                               children: [
-                                `${by} `,
+                                "by ",
                                 {
                                   type: "span",
                                   props: {
@@ -219,7 +203,7 @@ export default async (post, localeKey, localeConfig) => {
                             type: "span",
                             props: {
                               style: { overflow: "hidden", fontWeight: "bold" },
-                              children: siteTitle,
+                              children: SITE.title,
                             },
                           },
                         ],
@@ -238,8 +222,7 @@ export default async (post, localeKey, localeConfig) => {
       height: 630,
       embedFont: true,
       fonts: await loadGoogleFonts(
-        postTitle + post.data.author + siteTitle + by,
-        localeConfig.googleFontName
+        post.data.title + post.data.author + SITE.title + "by"
       ),
     }
   );

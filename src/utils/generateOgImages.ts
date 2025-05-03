@@ -2,7 +2,6 @@ import { Resvg } from "@resvg/resvg-js";
 import { type CollectionEntry } from "astro:content";
 import postOgImage from "./og-templates/post";
 import siteOgImage from "./og-templates/site";
-import type { LocaleProfile, LocaleKey } from "@/i18n/config";
 
 function svgBufferToPngBuffer(svg: string) {
   const resvg = new Resvg(svg);
@@ -10,19 +9,12 @@ function svgBufferToPngBuffer(svg: string) {
   return pngData.asPng();
 }
 
-export async function generateOgImageForPost(
-  post: CollectionEntry<"blog">,
-  localeKey: LocaleKey,
-  localeConfig: LocaleProfile
-) {
-  const svg = await postOgImage(post, localeKey, localeConfig);
+export async function generateOgImageForPost(post: CollectionEntry<"blog">) {
+  const svg = await postOgImage(post);
   return svgBufferToPngBuffer(svg);
 }
 
-export async function generateOgImageForSite(
-  localKey: LocaleKey,
-  localeConfig: LocaleProfile
-) {
-  const svg = await siteOgImage(localKey, localeConfig);
+export async function generateOgImageForSite() {
+  const svg = await siteOgImage();
   return svgBufferToPngBuffer(svg);
 }

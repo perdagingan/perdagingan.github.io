@@ -8,6 +8,9 @@
       "@/*": ["./src/*"]
     },
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "types": [] // Remove the exclusion of 'ungap__structured-clone'
   }
 }

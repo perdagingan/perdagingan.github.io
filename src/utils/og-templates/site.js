@@ -1,21 +1,8 @@
 import satori from "satori";
 import { SITE } from "@/config";
-import { translateFor } from "@/i18n/utils";
 import loadGoogleFonts from "../loadGoogleFont";
 
-export default async (localKey, localeConfig) => {
-  const t = translateFor(localKey);
-
-  const siteTitle =
-    localeConfig.direction === "rtl"
-      ? t("site.title").split(" ").reverse().join(" ")
-      : t("site.title");
-
-  const siteDesc =
-    localeConfig.direction === "rtl"
-      ? t("site.desc").split(" ").reverse().join(" ")
-      : t("site.desc");
-
+export default async () => {
   return satori(
     {
       type: "div",
@@ -91,14 +78,14 @@ export default async (localKey, localeConfig) => {
                             type: "p",
                             props: {
                               style: { fontSize: 72, fontWeight: "bold" },
-                              children: siteTitle,
+                              children: SITE.title,
                             },
                           },
                           {
                             type: "p",
                             props: {
                               style: { fontSize: 28 },
-                              children: siteDesc,
+                              children: SITE.desc,
                             },
                           },
                         ],
@@ -135,10 +122,7 @@ export default async (localKey, localeConfig) => {
       width: 1200,
       height: 630,
       embedFont: true,
-      fonts: await loadGoogleFonts(
-        siteTitle + siteDesc + SITE.website,
-        localeConfig.googleFontName
-      ),
+      fonts: await loadGoogleFonts(SITE.title + SITE.desc + SITE.website),
     }
   );
 };
