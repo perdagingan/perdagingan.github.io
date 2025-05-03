@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
       - ".github/workflows/deploy.yml"
       - "src/**"
       - "public/**"
-      - "astro.config.ts"
+      - "astro.config.*" # Covers both .ts and .mjs
       - "tsconfig.json"
-      - "eslint.config.mjs"
-      - "remark-collapse.d.ts"
+      - "package.json"
+      - "pnpm-lock.yaml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -26,22 +26,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Astro site
+        run: pnpm build
+
+      - name: Add .nojekyll file
+        run: touch ./dist/.nojekyll
+
+      - name: Upload production build
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - uses: actions/checkout@v3
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10.10.0
-      - run: pnpm install
+        uses: actions/deploy-pages@v4
 
   code_quality:
     uses: ./.github/workflows/code-standards-checks.yml
