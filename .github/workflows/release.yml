@@ -3,8 +3,14 @@ on:
     branches:
       - main
 
+name: Minimal Workflow
+
 permissions:
   contents: write
-  pull-requests: write
 
-name: release-please
+jobs:
+  placeholder-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder Step
+        run: echo "This is a minimal workflow to avoid errors."
