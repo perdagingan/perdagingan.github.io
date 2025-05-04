@@ -1,5 +1,5 @@
 ---
-author: Sat Naing
+author: Anam Fathonaya
 pubDatetime: 2022-09-23T15:22:00Z
 modDatetime: 2025-03-22T06:25:46.734Z
 title: Adding new posts in AstroPaper theme
@@ -25,7 +25,7 @@ Here are some rules/recommendations, tips & ticks for creating new posts in Astr
   </figcaption>
 </figure>
 
-## Table of contents
+## Rangkuman Isi
 
 ## Creating a Blog Post
 
@@ -135,7 +135,7 @@ For instance, if you want to place your table of contents just under the intro p
 
 Here are some recommendations, tips & ticks for creating new posts in AstroPaper blog theme.
 
-## Table of contents
+## Rangkuman Isi
 
 <!-- the rest of the post -->
 ```
@@ -144,7 +144,7 @@ Here are some recommendations, tips & ticks for creating new posts in AstroPaper
 
 There's one thing to note about headings. The AstroPaper blog posts use title (title in the frontmatter) as the main heading of the post. Therefore, the rest of the heading in the post should be using h2 \~ h6.
 
-This rule is not mandatory, but highly recommended for visual, accessibility and SEO purposes.
+This rule is not mkamutory, but highly recommended for visual, accessibility and SEO purposes.
 
 ## Storing Images for Blog Content
 
@@ -205,4 +205,4 @@ My recommendation for image compression sites.
 
 The default OG image will be placed if a post does not specify the OG image. Though not required, OG image related to the post should be specify in the frontmatter. The recommended size for OG image is **_1200 X 640_** px.
 
-> Since AstroPaper v1.4.0, OG images will be generated automatically if not specified. Check out [the announcement](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/).
+> Since AstroPaper v1.4.0, OG image will be generated automatically if not specified. Check out [the announcement](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/).

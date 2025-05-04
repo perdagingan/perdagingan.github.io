@@ -43,6 +43,10 @@
   pre > code {
     white-space: pre;
   }
+  
+  .prose .katex-display {
+    @apply text-foreground;
+  }
 
   /* Apply Dark Theme (if multi-theme specified) */
   html[data-theme="dark"] pre:has(code),

@@ -13,7 +13,7 @@ At last, the long-awaited AstroPaper v5 is finally here. AstroPaper v5 keeps the
 
 ![AstroPaper v5](@/assets/images/AstroPaper-v5.png)
 
-## Table of contents
+## Rangkuman Isi
 
 ## Major Changes
 
@@ -98,4 +98,4 @@ If you enjoy this theme, please consider starring the repo. You can also support
 
 Enjoy!
 
-[Sat Naing](https://satnaing.dev/)
+[Anam Fathonaya](https://satnaing.dev/)

@@ -1,5 +1,5 @@
 ---
-author: Sat Naing
+author: Anam Fathonaya
 pubDatetime: 2024-01-04T09:30:41.816Z
 title: AstroPaper 4.0
 slug: "astro-paper-v4"
@@ -14,7 +14,7 @@ Hello everyone! Wishing you a happy New Year 🎉 and all the best for 2024! We'
 
 ![AstroPaper v4](@/assets/images/AstroPaper-v4.png)
 
-## Table of contents
+## Rangkuman Isi
 
 ## Major Changes
 
@@ -32,7 +32,7 @@ The `postSlug` in the blog content schema is no longer available in AstroPaper v
 
 ```bash
 ---
-author: Sat Naing
+author: Anam Fathonaya
 pubDatetime: 2024-01-01T04:35:33.428Z
 title: AstroPaper 4.0
 slug: "astro-paper-v4" # if slug is not specified, it will be 'astro-paper-4' (file name).
@@ -120,5 +120,5 @@ We believe these updates will significantly elevate your AstroPaper experience. 
 
 Happy Blogging!
 
-[Sat Naing](https://satnaing.dev) <br/>
+[Anam Fathonaya](https://satnaing.dev) <br/>
 Creator of AstroPaper

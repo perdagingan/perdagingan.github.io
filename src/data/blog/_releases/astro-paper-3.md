@@ -1,5 +1,5 @@
 ---
-author: Sat Naing
+author: Anam Fathonaya
 pubDatetime: 2023-09-25T10:25:54.547Z
 title: AstroPaper 3.0
 slug: astro-paper-v3
@@ -14,7 +14,7 @@ We're excited to announce the release of AstroPaper v3, packed with new features
 
 ![AstroPaper v3](@/assets/images/AstroPaper-v3.png)
 
-## Table of contents
+## Rangkuman Isi
 
 ## Features & Changes
 

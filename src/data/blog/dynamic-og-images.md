@@ -1,50 +1,50 @@
 ---
-author: Sat Naing
-pubDatetime: 2022-12-28T04:59:04.866Z
-modDatetime: 2025-03-12T13:39:20.763Z
-title: Dynamic OG image generation in AstroPaper blog posts
+author: Anam Fathonaya
+pubDatetime: 2025-05-04T04:59:04.866Z
+modDatetime: 2025-05-04T13:39:20.763Z
+title: Dynamic OG image generation di postingan blog bertema AstroPaper
 slug: dynamic-og-image-generation-in-astropaper-blog-posts
 featured: false
 draft: false
 tags:
   - docs
   - release
-description: New feature in AstroPaper v1.4.0, introducing dynamic OG image generation for blog posts.
+description: Fitur baru di AstroPaper v1.4.0, memperkenalkan dynamic OG image generation untuk postingan blog.
 ---
 
-New feature in AstroPaper v1.4.0, introducing dynamic OG image generation for blog posts.
+Fitur baru di AstroPaper v1.4.0, memperkenalkan dynamic OG image generation untuk postingan blog.
 
-## Table of contents
+## Rangkuman Isi
 
-## Intro
+## Pendahuluan
 
-OG images (aka Social Images) play an important role in social media engagements. In case you don't know what OG image means, it is an image displayed whenever we share our website URL on social media such as Facebook, Discord etc.
+OG image (gambar sosial) memainkan peranan penting dalam engagement media sosial. Jika kamu tidak tahu apa itu _OG image_, ia adalah gambar yang ditampilkan setiap kali kamu ingin share URL situs web ini di media sosial seperti Facebook, discord dll.
 
-> The Social Image used for Twitter is technically not called OG image. However, in this post, I'll be using the term OG image for all types of Social Images.
+> Gambar sosial yang digunakan untuk Twitter secara teknis tidak disebut OG image.Namun, dalam posting ini, saya akan menggunakan istilah OG image untuk semua jenisnya.
 
-## Default/Static OG image (the old way)
+## OG Image Default/statis (_the old way_)
 
-AstroPaper already provided a way to add an OG image to a blog post. The author can specify the OG image in the frontmatter `ogImage`. Even when the author doesn't define the OG image in the frontmatter, the default OG image will be used as a fallback (in this case `public/astropaper-og.jpg`). But the problem is that the default OG image is static, which means every blog post that does not include an OG image in the frontmatter will always use the same default OG image despite each post title/content being different from others.
+AstroPaper sudah menyediakan cara untuk menambahkan OG image ke postingan blog. Penulis dapat menentukan OG image di frontMatter `ogimage`.Bahkan ketika penulis tidak mendefinisikan OG image di frontmatter, OG image default akan digunakan sebagai fallback (dalam hal ini `public/astropaper-og.jpg`). Tetapi masalahnya adalah bahwa OG image default bertipe statis, yang berarti setiap postingan blog yang tidak punya OG image di frontMatter akan selalu menggunakan OG image default yang sama meskipun setiap posting judul/konten berbeda.
 
-## Dynamic OG Image
+## OG Image Dinamis
 
-Generating a dynamic OG image for each post allows the author to avoid specifying an OG image for every single blog post. Besides, this will prevent the fallback OG image from being identical to all blog posts.
+Menghasilkan OG image yang dinamis untuk setiap posting memungkinkan penulis untuk menghindari penentuan OG image untuk tiap postingan blog. Selain itu, ini akan mencegah _fallback_ OG image identik dengan semua posting blog.
 
-In AstroPaper v1.4.0, Vercel's [Satori](https://github.com/vercel/satori) package is used for dynamic OG image generation.
+Dalam Astropaper v1.4.0, paket [Satori](https://github.com/vercel/satori) digunakan untuk pembuatan OG image dinamis.
 
-Dynamic OG images will be generated at build time for blog posts that
+OG image dinamis akan dihasilkan pada _build time_ untuk postingan blog yang:
 
-- don't include OG image in the frontmatter
-- are not marked as draft.
+- Tidak menyertakan OG image di frontmatter
+- Tidak ditkamui sebagai draft.
 
-## Anatomy of AstroPaper dynamic OG image
+## Anatomi OG Image Dinamis Astropaper
 
-Dynamic OG image of AstroPaper includes _the blog post title_, _author name_ and _site title_. Author name and site title will be retrieved via `SITE.author` and `SITE.title` of **"src/config.ts"** file. The title is generated from the blog post frontmatter `title`.  
-![Example Dynamic OG Image link](https://user-images.githubusercontent.com/53733092/209704501-e9c2236a-3f4d-4c67-bab3-025aebd63382.png)
+OG image dinamis dari Astropaper termasuk _the blog post title_, _author name_ dan _site title_. Nama penulis _(author)_ dan judul situs akan diambil melalui `SITE.author` dan `SITE.title` dari ** "src/config.ts" ** file. Judul ini dihasilkan dari `title` frontmatter postingan blog.
+! [Contoh tautan OG image Dinamis](https://user-images.githubusercontent.com/53733092/209704501-E9c2236a-3f4d-4c67-bab3-025aEebd6382.png)
 
-### Issue Non-Latin Characters
+### Menampilkan Karakter non-Latin
 
-Titles with non-latin characters won't display properly out of the box. To resolve this, we have to replace `fontsConfig` inside `loadGoogleFont.ts` with your preferred font.
+Judul dengan karakter non-latin tidak akan ditampilkan secara _proper_. Untuk mengatasi ini, kita harus mengganti `fontsconfig` di dalam` loadgooglefont.ts` dengan font pilihanmu.
 
 ```ts
 // file: loadGoogleFont.ts
@@ -79,19 +79,12 @@ async function loadGoogleFonts(
 }
 ```
 
-> Check out [this PR](https://github.com/satnaing/astro-paper/pull/318) for more info.
+> Coba cek [_pull-request_ ini](https://github.com/satnaing/astro-paper/pull/318) untuk penjelasan lebih lanjut.
 
 ## Trade-off
 
-While this is a nice feature to have, there's a trade-off. Each OG image takes roughly one second to generate. This might not be noticeable at first, but as the number of blog posts grows, you might want to disable this feature. Since every OG image takes time to generate, having many of them will increase the build time linearly.
+Meskipun ini adalah fitur yang bagus untuk dimiliki, ia ada kelemahan. Setiap OG image membutuhkan waktu kira -kira satu detik untuk dihasilkan. Ini mungkin tidak terlihat pada awalnya, tetapi ketika jumlah postingan blog bertambah, kamu mungkin ingin menonaktifkan fitur ini. Karena setiap gambar OG membutuhkan waktu build untuk dihasilkan, jika terlalu banyak akan menambah _build time_ secara signifikan.
 
-For example: If one OG image takes one second to generate, then 60 images will take around one minute, and 600 images will take approximately 10 minutes. This can significantly impact build times as your content scales.
+Misalnya: Jika satu OG image membutuhkan waktu satu detik untuk dihasilkan, maka 60 gambar akan memakan waktu sekitar satu menit, dan 600 gambar akan memakan waktu sekitar 10 menit. Bisa dibayangkan ya trade-off nya?
 
-Related issue: [#428](https://github.com/satnaing/astro-paper/issues/428)
-
-## Limitations
-
-At the time of writing this, [Satori](https://github.com/vercel/satori) is fairly new and has not reached major release yet. So, there are still some limitations to this dynamic OG image feature.
-
-- Besides, RTL languages are not supported yet.
-- [Using emoji](https://github.com/vercel/satori#emojis) in the title might be a little bit tricky.
+Topik yang mirip: [#428](https://github.com/satnaing/astro-paper/issues/428)

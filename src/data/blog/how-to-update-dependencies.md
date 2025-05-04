@@ -1,6 +1,6 @@
 ---
 title: How to update dependencies of AstroPaper
-author: Sat Naing
+author: Anam Fathonaya
 pubDatetime: 2023-07-20T15:33:05.569Z
 slug: how-to-update-dependencies
 featured: false
@@ -15,7 +15,7 @@ Updating the dependencies of a project can be tedious. However, neglecting to up
 
 ![Forrest Gump Fake Quote](@/assets/images/forrest-gump-quote.png)
 
-## Table of contents
+## Rangkuman Isi
 
 ## Updating Package Dependencies
 

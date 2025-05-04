@@ -1,5 +1,5 @@
 ---
-author: Sat Naing
+author: Anam Fathonaya
 pubDatetime: 2022-09-26T12:13:24Z
 modDatetime: 2024-01-04T09:09:06Z
 title: Predefined color schemes
@@ -17,7 +17,7 @@ I've crafted some predefined color schemes for this AstroPaper blog theme. You c
 
 If you don't know how you can configure color schemes, check [this blog post](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/).
 
-## Table of contents
+## Rangkuman Isi
 
 ## Light color schemes
 

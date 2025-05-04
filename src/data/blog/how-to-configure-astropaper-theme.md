@@ -1,5 +1,5 @@
 ---
-author: Sat Naing
+author: Anam Fathonaya
 pubDatetime: 2022-09-23T04:58:53Z
 modDatetime: 2025-03-20T03:15:57.792Z
 title: How to configure AstroPaper theme
@@ -12,21 +12,21 @@ tags:
 description: How you can make AstroPaper theme absolutely yours.
 ---
 
-AstroPaper is a highly customizable Astro blog theme. With AstroPaper, you can customize everything according to your personal taste. This article will explain how you can make some customizations easily in the config file.
+Astropaper adalah tema blog Astro yang bisa dikustomisasi. Dengan Astropaper, kamu dapat menyesuaikan semuanya sesuai dengan selera pribadi. Artikel ini akan menjelaskan bagaimana kamu dapat membuat beberapa kustomisasi dengan mudah di file config.
 
-## Table of contents
+## Rangkuman Isi
 
-## Configuring SITE
+## Mengatur SITE
 
-The important configurations resides in `src/config.ts` file. Within that file, you'll see the `SITE` object where you can specify your website's main configurations.
+Konfigurasinya ada di file `src/config.ts`. Di dalam file itu, kamu akan melihat objek `SITE` tempat kamu dapat menentukan konfigurasi utama situs web kamu.
 
-During development, it's okay to leave `SITE.website` empty. But in production mode, you should specify your deployed url in `SITE.website` option since this will be used for canonical URL, social card URL etc.. which are important for SEO.
+Selama pengembangan, tidak apa untuk meninggalkan `SITE.website` kosong. Tetapi dalam mode produksi, kamu harus menentukan URL spesisifk yang kamu gunakan di opsi `SITE.website`, karena ini akan digunakan untuk _canonical  URL_, _social card URL_ dll. yang penting untuk SEO.
 
 ```js
 // file: src/config.ts
 export const SITE = {
   website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
-  author: "Sat Naing",
+  author: "Anam Fathonaya",
   profile: "https://satnaing.dev/",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
   title: "AstroPaper",
@@ -44,7 +44,7 @@ export const SITE = {
   },
   dynamicOgImage: true, // enable automatic dynamic og-image generation
   lang: "en", // html lang code. Set this empty and default will be "en"
-  timezone: "Asia/Bangkok", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: "Asia/Jakarta", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 } as const;
 ```
 
@@ -57,7 +57,7 @@ Here are SITE configuration options
 | `profile`             | Your personal/portfolio website URL which is used for better SEO. Put `null` or empty string `""` if you don't have any.                                                                                                                                                                                                                                                                                                          |
 | `desc`                | Your site description. Useful for SEO and social media sharing.                                                                                                                                                                                                                                                                                                                                                                   |
 | `title`               | Your site name                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `ogImage`             | Your default OG image for the site. Useful for social media sharing. OG images can be an external image URL or they can be placed under `/public` directory.                                                                                                                                                                                                                                                                      |
+| `ogImage`             | Your default OG image for the site. Useful for social media sharing. OG image can be an external image URL or they can be placed under `/public` directory.                                                                                                                                                                                                                                                                      |
 | `lightAndDarkMode`    | Enable or disable `light & dark mode` for the website. If disabled, primary color scheme will be used. This option is enabled by default.                                                                                                                                                                                                                                                                                         |
 | `postPerIndex`        | The number of posts to be displayed at the home page under `Recent` section.                                                                                                                                                                                                                                                                                                                                                      |
 | `postPerPage`         | You can specify how many posts will be displayed in each posts page. (eg: if you set `SITE.postPerPage` to 3, each page will only show 3 posts per page)                                                                                                                                                                                                                                                                          |

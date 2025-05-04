@@ -1,14 +1,14 @@
 ---
-author: Alberto Perdomo
-pubDatetime: 2024-09-08T20:58:52.737Z
-modDatetime: 2025-03-22T09:25:46.734Z
-title: How to add LaTeX Equations in Astro blog posts
+author: Anam Fathonaya
+pubDatetime: 2025-05-04T12:00:52.737Z
+modDatetime: 2025-05-24T09:00:46.734Z
+title: Pakai LaTeX di Astro? Disa Dong...
 tags:
   - docs
-description: Learn how to add LaTeX equations in Astro blog posts using Markdown, KaTeX, and remark/rehype plugins.
+description: Cari tau bagaimana pakai LaTeX equations di Blog berbasis Astro menggunakan Markdown, KaTex, dan plugin remark/rehype
 ---
 
-This document demonstrates how to use LaTeX equations in your Markdown files for AstroPaper. LaTeX is a powerful typesetting system often used for mathematical and scientific documents.
+Artikel ini akan mencontohkan caranya menggunakan LaTeX equations di dalam file Markdown untuk tema AstroPaper. LaTeX adalah _typesetting system_ yang umum digunakan untuk menulis persamaan matematika dan rumus-rumus saintifik
 
 <figure>
   <img
@@ -20,19 +20,19 @@ This document demonstrates how to use LaTeX equations in your Markdown files for
   </figcaption>
 </figure>
 
-## Table of contents
+## Rangkuman Isi
 
-## Instructions
+## Langkah-langkah
 
-In this section, you will find instructions on how to add support for LaTeX in your Markdown files for AstroPaper.
+Di bagian ini, kamu akan mendapatkan instruksi untuk menambahkan dukungan LaTeX di file Markdown-mu untuk tema AstroPaper.
 
-1. Install the necessary remark and rehype plugins by running:
+1. Install plugin remark dan rehype dengan prompt:
 
    ```bash
    pnpm install rehype-katex remark-math katex
    ```
 
-2. Update the Astro configuration (`astro.config.ts`) to use the these plugins:
+2. Perbarui konfigurasi Astro (`astro.config.ts`) untuk menggunakan plugin tersebut:
 
    ```ts
    // other imports
@@ -58,7 +58,7 @@ In this section, you will find instructions on how to add support for LaTeX in y
    });
    ```
 
-3. Import KaTeX CSS in the main layout file `src/layouts/Layout.astro`
+3. Import KaTeX CSS ke file main layout project Astro-mu `src/layouts/Layout.astro`
 
    ```astro
    ---
@@ -81,7 +81,7 @@ In this section, you will find instructions on how to add support for LaTeX in y
    </body>
    ```
 
-4. As the last step, add a text-color for `katex` in `src/styles/typography.css`.
+4. Langkah terakir, tambahkan text-color untuk `katex` di `src/styles/typography.css`.
 
    ```css
    @plugin '@tailwindcss/typography';
@@ -99,37 +99,41 @@ In this section, you will find instructions on how to add support for LaTeX in y
    }
    ```
 
-And _voilà_, this setup allows you to write LaTeX equations in your Markdown files, which will be rendered properly when the site is built. Once you do it, the rest of the document will appear rendered correctly.
+dan _voilà_, setup ini memungkinkanmu untuk menulis LaTeX _equations_ di file Markdown, yang mana akan dirender saat proses build. Setelah melakukan langkah-langkah di atas, seluruh persamaan LaTeX akan ditampilkan sebagaimana mestinya.
 
 ---
 
 ## Inline Equations
 
-Inline equations are written between single dollar signs `$...$`. Here are some examples:
+_Inline equations_ atau persamaan satu-baris ditulis diantara tkamu baca dollar `$...$`. Berikut contohnya:
 
-1. The famous mass-energy equivalence formula: `$E = mc^2$`
-2. The quadratic formula: `$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$`
-3. Euler's identity: `$e^{i\pi} + 1 = 0$`
+1. Rumus dari teori relativitas Einstein: `$E = mc^2$`
+2. Persamaan kuadrat: `$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$`
+3. Pesamaan Euler: `$e^{i\pi} + 1 = 0$`
 
 ---
 
 ## Block Equations
 
-For more complex equations or when you want the equation to be displayed on its own line, use double dollar signs `$$...$$`:
+Untuk persamaan yang lebih kompleks atau perlu beberapa baris untuk keterbacaan, gunakan tkamu baca dollar dobel `$$...$$`:
 
-The Gaussian integral:
+Integral Gauss:
 
 ```bash
 $$ \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi} $$
 ```
+akan ditampilkan sebagai
+$$ \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi} $$
 
-The definition of the Riemann zeta function:
+Definisi dari fungsi zeta Riemann:
 
 ```bash
 $$ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} $$
 ```
+akan ditampilkan sebagai
+$$ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} $$
 
-Maxwell's equations in differential form:
+Persamaan Maxwell bentuk diferensial:
 
 ```bash
 $$
@@ -141,14 +145,23 @@ $$
 \end{aligned}
 $$
 ```
+akan ditampilkan sebagai
+$$
+\begin{aligned}
+\nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+\nabla \cdot \mathbf{B} &= 0 \\
+\nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+\nabla \times \mathbf{B} &= \mu_0\left(\mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}\right)
+\end{aligned}
+$$
 
 ---
 
-## Using Mathematical Symbols
+## Menggunakan Simbol Matematika
 
-LaTeX provides a wide range of mathematical symbols:
+LaTeX menyediakan cakupan yang luas untuk simbol-simbol matematika:
 
-- Greek letters: `$\alpha$`, `$\beta$`, `$\gamma$`, `$\delta$`, `$\epsilon$`, `$\pi$`
-- Operators: `$\sum$`, `$\prod$`, `$\int$`, `$\partial$`, `$\nabla$`
-- Relations: `$\leq$`, `$\geq$`, `$\approx$`, `$\sim$`, `$\propto$`
-- Logical symbols: `$\forall$`, `$\exists$`, `$\neg$`, `$\wedge$`, `$\vee$`
+- Abjad Yunani: `$\alpha$`, `$\beta$`, `$\gamma$`, `$\delta$`, `$\epsilon$`, `$\pi$`
+- Operator matematika: `$\sum$`, `$\prod$`, `$\int$`, `$\partial$`, `$\nabla$`
+- Relasi: `$\leq$`, `$\geq$`, `$\approx$`, `$\sim$`, `$\propto$`
+- Simbol logika: `$\forall$`, `$\exists$`, `$\neg$`, `$\wedge$`, `$\vee$`
