@@ -1,24 +1,23 @@
 ---
 author: Anam Fathonaya
 pubDatetime: 2022-09-25T15:20:35Z
-title: Customizing AstroPaper theme color schemes
+title: Menyesuaikan skema warna tema AstroPaper
 featured: false
 draft: false
 tags:
   - color-schemes
   - docs
 description:
-  How you can enable/disable light & dark mode; and customize color schemes
-  of AstroPaper theme.
+  Bagaimana kamu dapat mengaktifkan/menonaktifkan mode terang & gelap;dan menyesuaikan skema warna dari tema astropaper.
 ---
 
-This post will explain how you can enable/disable light & dark mode for the website. Moreover, you'll learn how you can customize color schemes of the entire website.
+Postingan ini akan menjelaskan bagaimana kamu dapat mengaktifkan/menonaktifkan mode Light & Dark untuk situs web. Selain itu, kamu akan belajar bagaimana kamu dapat menyesuaikan skema warna dari seluruh situs web.
 
 ## Rangkuman Isi
 
-## Enable/disable light & dark mode
+## Mengaktifkan/menonaktifkan light & dark mode
 
-AstroPaper theme will include light and dark mode by default. In other words, there will be two color schemes\_ one for light mode and another for dark mode. This default behavior can be disabled in SITE configuration object of the `src/config.ts` file.
+Tema Astropaper akan mencakup mode terang dan gelap secara default. Dengan kata lain, akan ada dua skema warna \ _ satu untuk mode cahaya dan satu lagi untuk mode gelap. Perilaku default ini dapat dinonaktifkan di objek konfigurasi situs dari file `src/config.ts`.
 
 ```js
 // file: src/config.ts
@@ -33,13 +32,13 @@ export const SITE = {
 };
 ```
 
-To disable `light & dark mode` set `SITE.lightAndDarkMode` to `false`.
+Untuk menonaktifkan mode `light & dark mode` atur nilai `SITE.lightAndDarkMode` ke `false`.
 
-## Choose primary color scheme
+## Memilih skema warna
 
-By default, if we disable `SITE.lightAndDarkMode`, we will only get system's prefers-color-scheme.
+Secara bawaan, jika kita disable `SITE.lightAndDarkMode`, Kita hanya akan mendapatkan skema prefers-warna sistem.
 
-Thus, to choose primary color scheme instead of prefers-color-scheme, we have to set color scheme in the primaryColorScheme variable inside `public/toggle-theme.js`.
+Dengan demikian, untuk memilih skema warna primer alih-alih lebih suka skema warna _preferred_, kita harus menetapkan skema warna dalam variabel `primarycolorscheme` di dalam `publik/sakelar-theme.js`.
 
 ```js
 /* file: public/toggle-theme.js */
@@ -51,15 +50,15 @@ const currentTheme = localStorage.getItem("theme");
 // other codes etc...
 ```
 
-The **primaryColorScheme** variable can hold two values\_ `"light"`, `"dark"`. You can leave the empty string (default) if you don't want to specify the primary color scheme.
+Variabel **primaryColorScheme** dapat menampung dua nilai \ _ `"light"`, `"dark"`. Anda dapat meninggalkan string kosong (default) jika Anda tidak ingin menentukan skema warna utama.
 
-- `""` - system's prefers-color-scheme. (default)
-- `"light"` - use light mode as primary color scheme.
-- `"dark"` - use dark mode as primary color scheme.
+- `""` - Sistem prefers-color-scheme. (default)
+- `"light"` - Gunakan mode cahaya sebagai skema warna primer.
+- `"dark"` - Gunakan mode gelap sebagai skema warna primer.
 
-<details><summary>Why 'primaryColorScheme' is not inside config.ts?</summary>
+<details><summary>Mengapa 'primaryColorsCheme' tidak ada di dalam config.ts?</summary>
 
-> To avoid color flickering on page reload, we have to place the toggle-switch JavaScript codes as early as possible when the page loads. It solves the problem of flickering, but as a trade-off, we cannot use ESM imports anymore.
+> Untuk menghindari warna flickering berkedip-kedip pada halaman ulang halaman, kita harus menempatkan kode javascript sakelar sakelar sedini mungkin ketika halaman dimuat.Ini memecahkan masalah berkedip-kedip, tetapi sebagai trade-off, kami tidak dapat menggunakan impor ESM lagi.
 
 [Click here](https://docs.astro.build/en/reference/directives-reference/#isinline) to know more about Astro's `is:inline` script.
 

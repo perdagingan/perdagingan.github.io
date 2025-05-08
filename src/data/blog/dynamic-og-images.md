@@ -83,8 +83,8 @@ async function loadGoogleFonts(
 
 ## Trade-off
 
-Meskipun ini adalah fitur yang bagus untuk dimiliki, ia ada kelemahan. Setiap OG image membutuhkan waktu kira -kira satu detik untuk dihasilkan. Ini mungkin tidak terlihat pada awalnya, tetapi ketika jumlah postingan blog bertambah, kamu mungkin ingin menonaktifkan fitur ini. Karena setiap gambar OG membutuhkan waktu build untuk dihasilkan, jika terlalu banyak akan menambah _build time_ secara signifikan.
+Meskipun ini adalah fitur yang bagus untuk dimiliki, ia punya kelemahan. Setiap OG image membutuhkan waktu kira -kira satu detik untuk dihasilkan. Ini mungkin tidak terlihat pada awalnya, tetapi ketika jumlah postingan blog bertambah, kamu mungkin ingin menonaktifkan fitur ini. Karena setiap gambar OG membutuhkan waktu build untuk dihasilkan, jika terlalu banyak akan menambah _build time_ secara signifikan.
 
-Misalnya: Jika satu OG image membutuhkan waktu satu detik untuk dihasilkan, maka 60 gambar akan memakan waktu sekitar satu menit, dan 600 gambar akan memakan waktu sekitar 10 menit. Bisa dibayangkan ya trade-off nya?
+Misalnya: Jika satu OG image membutuhkan waktu satu detik untuk dihasilkan, maka 60 gambar akan memakan waktu sekitar satu menit, dan 600 gambar akan memakan waktu sekitar 10 menit. Bisa dibayangkan kan trade-off nya?
 
 Topik yang mirip: [#428](https://github.com/satnaing/astro-paper/issues/428)
