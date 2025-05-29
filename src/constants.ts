@@ -6,6 +6,7 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
+import IconYoutube from "@/assets/icons/IconYoutube.svg";
 import { SITE } from "@/config.ts";
 
 export const SOCIALS = [
@@ -14,6 +15,12 @@ export const SOCIALS = [
     href: "https://github.com/perdagingan",
     linkTitle: ` ${SITE.title} on Github`,
     icon: IconGitHub,
+  },
+  {
+    name: "YouTube",
+    href: "https://youtube.com/anamfathonaya",
+    linkTitle: ` ${SITE.title} on YouTube`,
+    icon: IconYoutube,
   },
   {
     name: "X",
