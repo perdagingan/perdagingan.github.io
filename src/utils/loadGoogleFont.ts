@@ -36,14 +36,14 @@ async function loadGoogleFonts(
 > {
   const fontsConfig = [
     {
-      name: "Noto+Sans",
-      font: "Noto+Sans",
+      name: "Arial",
+      font: "Arial",
       weight: 400,
       style: "normal",
     },
     {
-      name: "Noto+Sans",
-      font: "Noto+Sans",
+      name: "Arial",
+      font: "Arial",
       weight: 700,
       style: "bold",
     },
