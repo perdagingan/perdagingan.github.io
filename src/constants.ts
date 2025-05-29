@@ -18,7 +18,7 @@ export const SOCIALS = [
   },
   {
     name: "YouTube",
-    href: "https://youtube.com/anamfathonaya",
+    href: "https://www.youtube.com/@anamfathonaya",
     linkTitle: ` ${SITE.title} on YouTube`,
     icon: IconYoutube,
   },
