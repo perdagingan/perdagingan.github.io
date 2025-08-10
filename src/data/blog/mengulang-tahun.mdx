@@ -13,15 +13,18 @@ description: Memaknai kembali tentang apa yang perlu dirayakan.
 ---
 
 import QuranVerses from '@/components/QuranVerses.astro';
+import cakeImg from '@/assets/images/pexels-tima-miroshnichenko-5805043.jpg';
+import thugImg from '@/assets/images/salken-aku-gue.jpg';
 
 Sukacita akan ulang tahun tiap insan kan terasa berbeda. Dibaliknya ada cerita dan proses "berkembang" dalam pola pikir untuk memaknai seraya bertanya, "Semakin dekat dengan kematian kok dirayakan?". Atau memang jadi barang wajib tuk dipamerkan?. Ah, apalah pikiran otak jelang tengah malam ini berdendang.
 
 <figure>
   <img
-    src="src\assets\images\pexels-tima-miroshnichenko-5805043.jpg"
+    src={cakeImg.src}
     alt="23th birthday cake with the 23 custom candle"
+    loading="lazy"
   />
-    <figcaption class="text-center">
+  <figcaption class="text-center">
     Foto oleh Tima Miroshnichenko: <a href="https://www.pexels.com/id-id/foto/menyenangkan-mengasyikkan-lucu-seru-5805043/">Pexels</a>
   </figcaption>
 </figure>
@@ -51,8 +54,9 @@ Selamat ulang tahun, aku guwe. Yang ke-23.
 
 <figure>
   <img
-    src="src\assets\images\salken-aku-gue.jpg"
+    src={thugImg.src}
     alt="aku gue indonesian thug 'meme'"
+    loading="lazy"
   />
 </figure>
 
