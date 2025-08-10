@@ -7,6 +7,8 @@ import Tag from "@/components/Tag.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
+import QuranVerses from "@/components/QuranVerses.astro";
+import QuranVersesClient from "@/components/QuranVersesClient.astro";
 import BackButton from "@/components/BackButton.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
@@ -17,9 +19,67 @@ import { SITE } from "@/config";
 export interface Props {
   post: CollectionEntry<"blog">;
   posts: CollectionEntry<"blog">[];
+  quranVerses?: string | string[];
+  quranShowTransliteration?: boolean;
+  quranShowTranslation?: boolean;
+  quranTranslationIds?: number | number[];
+  quranSurahNameLanguage?: string;
+  quranClient?: boolean; // if true use client hydrated version
 }
 
-const { post, posts } = Astro.props;
+const {
+  post,
+  posts,
+  quranVerses,
+  quranShowTransliteration = false,
+  quranShowTranslation = false,
+  quranTranslationIds,
+  quranSurahNameLanguage = 'ar',
+  quranClient = false,
+} = Astro.props as Props;
+
+// Automatic translation ID defaults per language (quran.com resource IDs)
+// NOTE: These IDs may change upstream; fallback fetch implemented below.
+const DEFAULT_TRANSLATION_IDS: Record<string, number[]> = {
+  en: [131], // e.g., Dr. Mustafa Khattab – The Clear Quran (example ID)
+  id: [134], // Indonesian (example ID)
+  ms: [38],  // Malay (placeholder/example)
+  fr: [149], // French
+  es: [187], // Spanish
+  de: [103], // German
+};
+
+// Cache translation resources in-memory across requests
+const translationResourceCache: { list?: any[] } = (globalThis as any).__QURAN_TRANSLATION_RES_CACHE__ ||= {};
+
+async function fetchTranslationResources(): Promise<any[]> {
+  if (translationResourceCache.list) return translationResourceCache.list;
+  try {
+    const res = await fetch('https://api.quran.com/api/v4/resources/translations');
+    if (res.ok) {
+      const json = await res.json();
+      const list = json?.translations || [];
+      translationResourceCache.list = list;
+      return list;
+    }
+  } catch {}
+  return [];
+}
+
+async function resolveDefaultTranslationIds(lang: string): Promise<number[] | undefined> {
+  // Direct mapping first
+  if (DEFAULT_TRANSLATION_IDS[lang]) return DEFAULT_TRANSLATION_IDS[lang];
+  // Fallback: fetch list and pick first resource matching language_code
+  const list = await fetchTranslationResources();
+  const matches = list.filter((t: any) => t.language_code === lang);
+  if (matches.length) return [matches[0].id].filter(Boolean);
+  return undefined;
+}
+
+let effectiveTranslationIds = quranTranslationIds as number | number[] | undefined;
+if (quranShowTranslation && !effectiveTranslationIds) {
+  effectiveTranslationIds = await resolveDefaultTranslationIds(quranSurahNameLanguage) as any;
+}
 
 const {
   title,
@@ -103,6 +163,28 @@ const nextPost =
     </div>
     <article id="article" class="mx-auto prose mt-8 max-w-3xl">
       <Content />
+      {quranVerses && (
+        <div class="mt-10 border-t pt-6">
+          <h2 class="text-xl font-semibold mb-4">Qur'an</h2>
+      {quranClient ? (
+            <QuranVersesClient
+              verses={quranVerses}
+              showTransliteration={quranShowTransliteration}
+              showTranslation={quranShowTranslation}
+        translationIds={effectiveTranslationIds}
+              surahNameLanguage={quranSurahNameLanguage}
+            />
+          ) : (
+            <QuranVerses
+              verses={quranVerses}
+              showTransliteration={quranShowTransliteration}
+              showTranslation={quranShowTranslation}
+        translationIds={effectiveTranslationIds}
+              surahNameLanguage={quranSurahNameLanguage}
+            />
+          )}
+        </div>
+      )}
     </article>
 
     <hr class="my-8 border-dashed" />
@@ -110,7 +192,7 @@ const nextPost =
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
     <ul class="mt-4 mb-8 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+      {tags.map((tag: string) => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
     </ul>
 
     <div

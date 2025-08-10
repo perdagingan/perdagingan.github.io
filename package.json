@@ -11,10 +11,13 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint ."
+  ,"check:slugs": "node scripts/check-duplicate-slugs.mjs"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.3",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.2.1",
+    "@quranjs/api": "^1.8.0",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.5",
     "astro": "^5.5.2",

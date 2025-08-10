@@ -9,8 +9,8 @@ export interface Props {
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
-  const postResult = posts.map(post => ({
+  const posts = await getCollection("blog", ({ data }: { data: CollectionEntry<'blog'>['data'] }) => !data.draft);
+  const postResult = posts.map((post: CollectionEntry<'blog'>) => ({
     params: { slug: getPath(post.id, post.filePath, false) },
     props: { post },
   }));
@@ -24,4 +24,13 @@ const posts = await getCollection("blog");
 const sortedPosts = getSortedPosts(posts);
 ---
 
-<PostDetails post={post} posts={sortedPosts} />
+<PostDetails
+  post={post}
+  posts={sortedPosts}
+  {...(post.data.quranVerses ? { quranVerses: post.data.quranVerses } : {})}
+  {...(post.data.quranShowTransliteration ? { quranShowTransliteration: post.data.quranShowTransliteration } : {})}
+  {...(post.data.quranShowTranslation ? { quranShowTranslation: post.data.quranShowTranslation } : {})}
+  {...(post.data.quranTranslationIds ? { quranTranslationIds: post.data.quranTranslationIds } : {})}
+  {...(post.data.quranSurahNameLanguage ? { quranSurahNameLanguage: post.data.quranSurahNameLanguage } : {})}
+  {...(post.data.quranClient ? { quranClient: post.data.quranClient } : {})}
+/>

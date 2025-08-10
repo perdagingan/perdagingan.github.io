@@ -1,0 +1,236 @@
+---
+// QuranVerses.astro (generic)
+// Usage examples:
+//   <QuranVerses verses="59:18" />
+//   <QuranVerses verses={[ '59:18', '28:77' ]} />
+//   <QuranVerses verses="59:18,28:77" />
+// Props:
+//   verses: string | string[]  (required) — verse key(s) in the form "chapter:ayah".
+//   showLabels?: boolean (default true) — show Arabic surah name and ayah number label if available.
+//   showSource?: boolean (default false) — show which source succeeded.
+//   class?: string — extra classes for the wrapper.
+//   showTransliteration?: boolean (default false) — show transliteration (text_imlaei) if available.
+//   showTranslation?: boolean (default false) — show translation(s) if fetched.
+//   translationIds?: number | number[] — quran.com translation resource id(s) (required if showTranslation).
+//   surahNameLanguage?: string (default 'ar') — language for chapter name when available (en, id, etc.).
+//   preloadChapters?: boolean (default true) — fetch chapter metadata to display names.
+// Notes:
+//   - Fetch order: library (@quranjs/api) then direct HTTP fallback.
+//   - No translation; Arabic (text_uthmani) only.
+
+interface Props {
+	verses: string | string[];
+	showLabels?: boolean;
+	showSource?: boolean;
+	showTransliteration?: boolean;
+	showTranslation?: boolean;
+	translationIds?: number | number[];
+	surahNameLanguage?: string;
+	preloadChapters?: boolean;
+	class?: string;
+}
+
+interface VerseResult {
+	key: string;
+	text: string | null; // Arabic
+	transliteration?: string | null;
+	translations?: TranslationResult[];
+	source: 'quranjs' | 'http' | 'error';
+}
+
+interface TranslationResult {
+	id?: number;
+	resource_name?: string;
+	text?: string;
+	language_name?: string;
+}
+
+const cache: Map<string, VerseResult> = (globalThis as any).__QURAN_VERSE_CACHE__ ||= new Map();
+
+function normalizeVerses(input: Props['verses']): string[] {
+	if (Array.isArray(input)) return input;
+	return input.split(',').map(s => s.trim()).filter(Boolean);
+}
+
+async function fetchViaLibrary(key: string, wantImlaei: boolean, translationIds?: number[]): Promise<Partial<VerseResult> | null> {
+	try {
+		const { quran } = await import('@quranjs/api');
+		// Build options dynamically
+		const fields = ['text_uthmani'];
+		if (wantImlaei) fields.push('text_imlaei');
+		const opts: any = { fields: fields.join(',') };
+		if (translationIds && translationIds.length) {
+			opts.translations = translationIds.join(',');
+			opts.translation_fields = 'resource_name,language_name,text';
+		}
+		// @ts-ignore dynamic method (types may not expose byKey generically)
+		const data = await quran.v4.verses.byKey(key, opts);
+		const verse = data?.verse || data?.verses?.[0];
+		if (!verse) return null;
+		const translations: TranslationResult[] | undefined = verse.translations?.map((t: any) => ({
+			id: t?.id,
+			resource_name: t?.resource_name,
+			language_name: t?.language_name,
+			text: t?.text,
+		}));
+		return {
+			key,
+			text: verse.text_uthmani || verse.text || null,
+			transliteration: verse.text_imlaei || null,
+			translations,
+			source: 'quranjs',
+		};
+	} catch {
+		return null;
+	}
+}
+
+async function fetchViaHttp(key: string, wantImlaei: boolean, translationIds?: number[]): Promise<Partial<VerseResult> | null> {
+	try {
+		const fields = ['text_uthmani'];
+		if (wantImlaei) fields.push('text_imlaei');
+		const params = new URLSearchParams({ fields: fields.join(',') });
+		if (translationIds && translationIds.length) {
+			params.set('translations', translationIds.join(','));
+			params.set('translation_fields', 'resource_name,language_name,text');
+		}
+		const res = await fetch(`https://api.quran.com/api/v4/verses/by_key/${key}?${params}`);
+		if (!res.ok) return null;
+		const json = await res.json();
+		const verse = json?.verse;
+		if (!verse) return null;
+		const translations: TranslationResult[] | undefined = verse.translations?.map((t: any) => ({
+			id: t?.id,
+			resource_name: t?.resource_name,
+			language_name: t?.language_name,
+			text: t?.text,
+		}));
+		return {
+			key,
+			text: verse.text_uthmani || verse.text || null,
+			transliteration: verse.text_imlaei || null,
+			translations,
+			source: 'http',
+		};
+	} catch {
+		return null;
+	}
+}
+
+async function resolveVerse(key: string, wantImlaei: boolean, translationIds?: number[]): Promise<VerseResult> {
+	if (cache.has(key)) return cache.get(key)!;
+	const lib = await fetchViaLibrary(key, wantImlaei, translationIdsArray(translationIds));
+	if (lib) {
+		const result: VerseResult = { key, text: lib.text || null, transliteration: lib.transliteration, translations: lib.translations, source: 'quranjs' };
+		cache.set(key, result);
+		return result;
+	}
+	const http = await fetchViaHttp(key, wantImlaei, translationIdsArray(translationIds));
+	if (http) {
+		const result: VerseResult = { key, text: http.text || null, transliteration: http.transliteration, translations: http.translations, source: 'http' };
+		cache.set(key, result);
+		return result;
+	}
+	const result = { key, text: null, source: 'error' as const };
+	cache.set(key, result);
+	return result;
+}
+// Chapter metadata cache (names, etc.)
+interface ChapterMeta { id: number; name: string; arabic?: string; }
+const chapterCache: Map<number, ChapterMeta> = (globalThis as any).__QURAN_CHAPTER_CACHE__ ||= new Map();
+
+async function fetchChapterMeta(id: number, lang: string): Promise<ChapterMeta | null> {
+	if (chapterCache.has(id)) return chapterCache.get(id)!;
+	// Try library first
+	try {
+		const { quran } = await import('@quranjs/api');
+		// @ts-ignore assume signature quran.v4.chapters.get(id, { language }) or similar; fallback to HTTP if fails
+		const data = await quran.v4.chapters.find ? quran.v4.chapters.find(id, { language: lang }) : null;
+		const chapter = data?.chapter;
+		if (chapter) {
+			const meta: ChapterMeta = { id, name: chapter.name_simple || chapter.name_arabic, arabic: chapter.name_arabic };
+			chapterCache.set(id, meta);
+			return meta;
+		}
+	} catch {}
+	// HTTP fallback
+	try {
+		const res = await fetch(`https://api.quran.com/api/v4/chapters/${id}?language=${lang}`);
+		if (res.ok) {
+			const json = await res.json();
+			const ch = json?.chapter;
+			if (ch) {
+				const meta: ChapterMeta = { id, name: ch.name_simple || ch.name_arabic, arabic: ch.name_arabic };
+				chapterCache.set(id, meta);
+				return meta;
+			}
+		}
+	} catch {}
+	return null;
+}
+
+function toArabicDigits(input: string | undefined): string | undefined {
+	if (!input) return input;
+	return input.replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)]);
+}
+
+function translationIdsArray(ids?: number | number[]): number[] | undefined {
+	if (!ids && ids !== 0) return undefined;
+	return Array.isArray(ids) ? ids : [ids];
+}
+
+async function buildLabel(key: string, lang: string, preload: boolean): Promise<string | null> {
+	const [chapterStr, ayahStr] = key.split(':');
+	const chapterId = parseInt(chapterStr, 10);
+	if (!chapterId) return null;
+	let meta: ChapterMeta | null = null;
+	if (preload) meta = await fetchChapterMeta(chapterId, lang);
+	const baseName = meta ? (lang === 'ar' ? (meta.arabic || meta.name) : meta.name) : null;
+	if (!baseName) return null;
+	return lang === 'ar'
+		? `${baseName} ${toArabicDigits(ayahStr)}`
+		: `${baseName} ${ayahStr}`;
+}
+
+const { verses, showLabels = true, showSource = false, showTransliteration = false, showTranslation = false, translationIds, surahNameLanguage = 'ar', preloadChapters = true, class: extraClass = '' } = Astro.props as Props;
+const verseKeys = normalizeVerses(verses);
+// Preload chapter metadata if needed
+if (preloadChapters) {
+	const chapterIds = Array.from(new Set(verseKeys.map(v => parseInt(v.split(':')[0], 10)).filter(Boolean)));
+	await Promise.all(chapterIds.map(id => fetchChapterMeta(id, surahNameLanguage)));
+}
+const results: VerseResult[] = await Promise.all(verseKeys.map(key => resolveVerse(key, showTransliteration, showTranslation ? translationIdsArray(translationIds) : undefined)));
+const labels: Record<string, string | null> = {};
+if (showLabels) {
+	for (const key of verseKeys) {
+		labels[key] = await buildLabel(key, surahNameLanguage, preloadChapters);
+	}
+}
+---
+<section dir="rtl" lang="ar" class={`prose max-w-none text-2xl leading-relaxed space-y-8 ${extraClass}`}>
+	{results.map(r => (
+		<div>
+			{showLabels && labels[r.key] && (
+				<div class="font-bold mb-2">{labels[r.key]}</div>
+			)}
+			{r.text ? (
+				<p class="m-0">{r.text}</p>
+			) : (
+				<p class="m-0 text-red-600">تعذر تحميل الآية ({r.key})</p>
+			)}
+			{showTransliteration && r.transliteration && (
+				<p class="m-0 text-base opacity-80" dir="ltr">{r.transliteration}</p>
+			)}
+			{showTranslation && r.translations && r.translations.length > 0 && (
+				<div class="mt-2 space-y-2" dir="ltr">
+					{r.translations.map(t => (
+						<p class="m-0 text-base" data-translation-id={t.id}> {t.text}</p>
+					))}
+				</div>
+			)}
+			{showSource && (
+				<div class="mt-2 text-xs opacity-60" dir="ltr">source: {r.source}</div>
+			)}
+		</div>
+	))}
+</section>

@@ -5,8 +5,8 @@ import { SITE } from "@/config.ts";
 export const BLOG_PATH = "src/data/blog";
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: `./${BLOG_PATH}` }),
-  schema: ({ image }) =>
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
+  schema: ({ image }: { image: any }) =>
     z.object({
       author: z.string().default(SITE.author),
       pubDatetime: z.date(),
@@ -20,6 +20,13 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+  // Optional Qur'an verse embedding controls
+  quranVerses: z.union([z.string(), z.array(z.string())]).optional(),
+  quranShowTransliteration: z.boolean().optional(),
+  quranShowTranslation: z.boolean().optional(),
+  quranTranslationIds: z.union([z.number(), z.array(z.number())]).optional(),
+  quranSurahNameLanguage: z.string().optional(),
+  quranClient: z.boolean().optional(),
     }),
 });
 
